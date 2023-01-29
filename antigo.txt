@@ -1,0 +1,70 @@
+import pytest
+from selenium import webdriver
+
+    # inicializando o webdriver
+driver = webdriver.Chrome()
+    # navegando para a página do triângulo
+driver.get("http://www.vanilton.net/triangulo/")
+
+    # localizando os campos de entrada para os lados do triângulo
+
+side1 = driver.find_element('xpath', '/html/body/form/input[1]')
+side2 = driver.find_element('xpath', '/html/body/form/input[2]')
+side3 = driver.find_element('xpath', '/html/body/form/input[3]')
+
+    # localizando e clicando no botão de submit
+identify_button = driver.find_element('xpath', '/html/body/form/input[4]')
+
+    # Test case 1: Triângulo equilátero
+side1.send_keys("3")
+side2.send_keys("3")
+side3.send_keys("3")
+identify_button.click()
+output = driver.find_element('xpath', '/html/body/div[4]').text
+assert output == "Equilátero"
+
+side1 = driver.find_element('xpath', '/html/body/form/input[1]')
+side2 = driver.find_element('xpath', '/html/body/form/input[2]')
+side3 = driver.find_element('xpath', '/html/body/form/input[3]')
+
+    # localizando e clicando no botão de submit
+identify_button = driver.find_element('xpath', '/html/body/form/input[4]')
+
+    # Test case 2: Triângulo isósceles
+side1.send_keys("3")
+side2.send_keys("3")
+side3.send_keys("2")
+identify_button.click()
+output = driver.find_element('xpath', '/html/body/div[4]').text
+assert output == "Isósceles"
+
+side1 = driver.find_element('xpath', '/html/body/form/input[1]')
+side2 = driver.find_element('xpath', '/html/body/form/input[2]')
+side3 = driver.find_element('xpath', '/html/body/form/input[3]')
+
+identify_button = driver.find_element('xpath', '/html/body/form/input[4]')
+
+    # Test case 3: Triângulo escaleno
+side1.send_keys("1")
+side2.send_keys("2")
+side3.send_keys("3")
+identify_button.click()
+output = driver.find_element('xpath', '/html/body/div[4]').text
+assert output == "Escaleno"
+
+side1 = driver.find_element('xpath', '/html/body/form/input[1]')
+side2 = driver.find_element('xpath', '/html/body/form/input[2]')
+side3 = driver.find_element('xpath', '/html/body/form/input[3]')
+
+identify_button = driver.find_element('xpath', '/html/body/form/input[4]')
+
+    # Test case 3: Triângulo escaleno
+side1.send_keys("-1")
+side2.send_keys("-2")
+side3.send_keys("-2")
+identify_button.click()
+output = driver.find_element('xpath', '/html/body/div[4]').text
+assert output == "Escaleno"
+
+    # fechando o navegador
+driver.quit()
